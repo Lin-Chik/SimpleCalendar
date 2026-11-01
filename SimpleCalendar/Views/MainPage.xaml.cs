@@ -48,6 +48,18 @@ namespace SimpleCalendar.Views
             itemsCollectionView.ItemsSource = filteredItems;
         }
 
+        //Добавление элемента (стикера) 
+        private string _selectedSticker = string.Empty;
+
+        private void StickerSelected(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                _selectedSticker = button.CommandParameter?.ToString() ?? string.Empty;
+
+            }
+        }
+
         // Добавление быстрой заметки
         private async void AddNote_Clicked(object sender, EventArgs e)
         {
@@ -59,7 +71,8 @@ namespace SimpleCalendar.Views
                 Title = text,
                 Date = SelectedDate,
                 TimeText = "Заметка (Весь день)",
-                Category = "Заметка"
+                Category = "Заметка",
+                Sticker = _selectedSticker // Добавляем стикер
             };
 
             _allItems.Add(item);
